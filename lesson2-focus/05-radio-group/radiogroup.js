@@ -2,12 +2,12 @@
   'use strict';
 
   // Define values for keycodes
-  var VK_ENTER      = 13;
-  var VK_SPACE      = 32;
-  var VK_LEFT       = 37;
-  var VK_UP         = 38;
-  var VK_RIGHT      = 39;
-  var VK_DOWN       = 40;
+  var VK_ENTER = 13;
+  var VK_SPACE = 32;
+  var VK_LEFT = 37;
+  var VK_UP = 38;
+  var VK_RIGHT = 39;
+  var VK_DOWN = 40;
 
   // Helper function to convert NodeLists to Arrays
   function slice(nodes) {
@@ -24,29 +24,35 @@
   }
 
   RadioGroup.prototype.handleKeyDown = function(e) {
-    switch(e.keyCode) {
-
+    switch (e.keyCode) {
       case VK_UP:
       case VK_LEFT: {
-
         e.preventDefault();
 
         // This seems like a good place to do some stuff :)
+        console.log(this.focusedIdx);
+        if (this.focusedIdx === 0) {
+          this.focusedIdx = this.buttons.length - 1;
+        } else {
+          this.focusedIdx--;
+        }
 
         break;
-
       }
 
       case VK_DOWN:
       case VK_RIGHT: {
-
         e.preventDefault();
 
         // This seems like a good place to do some stuff :)
-
+        console.log(this.focusedIdx);
+        if (this.focusedIdx === this.buttons.length - 1) {
+          this.focusedIdx = 0;
+        } else {
+          this.focusedIdx++;
+        }
         break;
       }
-
     }
 
     this.changeFocus(this.focusedIdx); // <-- Hmm, interesting...
@@ -65,5 +71,4 @@
   };
 
   var group1 = new RadioGroup('#group1');
-
-}());
+})();
